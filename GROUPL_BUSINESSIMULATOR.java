@@ -1,17 +1,22 @@
 import java.util.Locale;
 /**
- * Group L - QuickPrint Shop
- * Object Oriented Programming - Java Fundamentals
+ * GROUP L - QuickPrint Shop
+ * SENDIKKADIIWA EMILLY S25B23/050
+ * KEITH NTEGE S25B23/029
+ * EMMANUEL AINOMUGISHA S25B23/082
+ * MARIE LOUIS S25B23/060
+ * SHERINA AMONG M25B23/045
+ * 
  */
 public class GROUPL_BUSINESSIMULATOR {
 
     public static void main(String[] args) {
 
-        // ---- Step 1: Store the four items and their prices using arrays ----
+        // Step 1: Store the four items and their prices using arrays
         String[] itemNames = {"Photocopy (page)", "Printing (page)", "Binding", "Lamination"};
         double[] itemPrices = {200.00, 500.00, 3000.00, 1000.00};
 
-        // ---- Step 2: Display the price list (looped over the arrays) ----
+        // Step 2: Display the price list (looped over the arrays)
         System.out.println("==== QUICKPRINT SHOP ====");
         System.out.println("---- PRICE LIST ----");
         for (int i = 0; i < itemNames.length; i++) {
@@ -19,7 +24,7 @@ public class GROUPL_BUSINESSIMULATOR {
         }
         System.out.println();
 
-        // ---- Step 3: Quantities the customer is buying (set in code for now) ----
+        // Step 3: Quantities the customer is buying (set in code for now)
         // Using the "Check yourself" numbers from the brief so the totals can be verified.
         int[] quantities = {
                 49, // Photocopy (page)
@@ -28,7 +33,7 @@ public class GROUPL_BUSINESSIMULATOR {
                 10  // Lamination
         };
 
-        // ---- Step 4: Work out each item's subtotal (with discount rules applied) ----
+        // Step 4: Work out each item's subtotal (with discount rules applied)
         double[] subtotals = new double[itemNames.length];
         boolean[] discountApplied = new boolean[itemNames.length];
 
@@ -37,13 +42,13 @@ public class GROUPL_BUSINESSIMULATOR {
             discountApplied[i] = isDiscountApplied(i, quantities[i]);
         }
 
-        // ---- Step 5: Add up all subtotals into one grand total ----
+        // Step 5: Add up all subtotals into one grand total
         double grandTotal = 0.0;
         for (double subtotal : subtotals) {
             grandTotal += subtotal;
         }
 
-        // ---- Step 6: Print the itemised receipt ----
+        //Step 6: Print the itemised receipt
         printReceipt(itemNames, quantities, subtotals, discountApplied, grandTotal);
     }
 
