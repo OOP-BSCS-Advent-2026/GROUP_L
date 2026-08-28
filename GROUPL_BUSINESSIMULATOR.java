@@ -2,7 +2,7 @@ import java.util.Locale;
 /**
  * GROUP L - QuickPrint Shop
  * SENDIKKADIIWA EMILLY S25B23/050
- * KEITH NTEGE S25B23/029
+ * KEITH ROWLAND NTEGE S25B23/029
  * EMMANUEL AINOMUGISHA S25B23/082
  * MARIE LOUIS S25B23/060
  * SHERINA AMONG M25B23/045
@@ -113,7 +113,7 @@ public class GROUPL_BUSINESSIMULATOR {
             System.out.printf(Locale.US, "%d. %-20s Qty: %-4d Subtotal: UGX %,10.2f  (%s)%n",
                     i + 1, itemNames[i], quantities[i], subtotals[i], discountLabel);
         }
-        System.out.println("------------------------------------------------------------");
+        System.out.println("============================================================");
         System.out.printf(Locale.US, "GRAND TOTAL: UGX %,.2f%n", grandTotal);
         System.out.println("============================================================");
     }
