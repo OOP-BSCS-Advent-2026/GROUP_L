@@ -64,15 +64,15 @@ public class GROUPL_BUSINESSIMULATOR {
                     subtotal = subtotal * 0.95;
                 }
                 break;
-            case 1:
+            case 1: //printing but no discounts offered
                 break;
-            case 2:
+            case 2: //Binding
                 if (quantity >= 5) {
             subtotal = subtotal - 500.00;
         }
         break;
-    case 3: // Lamination
-        if (quantity >= 10) {
+            case 3: // Lamination
+                if (quantity >= 10) {
             subtotal = subtotal * 0.90;
         }
         break;
