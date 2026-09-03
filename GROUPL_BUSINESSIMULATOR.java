@@ -1,4 +1,5 @@
 import java.util.Locale;
+
 /**
  * GROUP L - QuickPrint Shop
  * SENDIKKADIIWA EMILLY S25B23/050
@@ -6,13 +7,20 @@ import java.util.Locale;
  * EMMANUEL AINOMUGISHA S25B23/082
  * MARIE LOUIS S25B23/060
  * SHERINA AMONG M25B23/045
- * 
  */
 public class GROUPL_BUSINESSIMULATOR {
 
+    // Discount constants
+    private static final int QTY_PHOTOCOPY_DISCOUNT = 50;
+    private static final double RATE_PHOTOCOPY = 0.05; // 5%
+    private static final int QTY_BINDING_DISCOUNT = 5;
+    private static final double FLAT_BINDING = 500.00;
+    private static final int QTY_LAMINATION_DISCOUNT = 10;
+    private static final double RATE_LAMINATION = 0.10; // 10%
+
     public static void main(String[] args) {
 
-        // An arrary to store the four items and their prices using arrays
+        // Array to store the four items and their prices
         String[] itemNames = {"Photocopy (page)", "Printing (page)", "Binding", "Lamination"};
         double[] itemPrices = {200.00, 500.00, 3000.00, 1000.00};
 
@@ -25,7 +33,6 @@ public class GROUPL_BUSINESSIMULATOR {
         System.out.println();
 
         // Quantities the customer is buying
-        
         int[] quantities = {
                 49, // Photocopy (page)
                 2,  // Printing (page)
@@ -36,7 +43,6 @@ public class GROUPL_BUSINESSIMULATOR {
         // Work out each item's subtotal with discount rules applied
         double[] subtotals = new double[itemNames.length];
         boolean[] discountApplied = new boolean[itemNames.length];
-        
 
         for (int i = 0; i < itemNames.length; i++) {
             subtotals[i] = calculateSubtotal(i, itemPrices[i], quantities[i]);
@@ -49,35 +55,38 @@ public class GROUPL_BUSINESSIMULATOR {
             grandTotal += subtotal;
         }
 
-        //Print the itemised receipt
+        // Print the itemised receipt
         printReceipt(itemNames, quantities, subtotals, discountApplied, grandTotal);
     }
 
-    
-     /*Adds up all subtotals into one grand total */
+    /**
+     * Calculates discounted subtotal. Uses constants instead of magic numbers
+     * and clean switch formatting for efficiency and readability.
+     */
     static double calculateSubtotal(int itemIndex, double price, int quantity) {
         double subtotal = price * quantity;
 
-        switch (itemIndex){
-            case 0: //Photocopy
-                if (quantity >= 50) {
-                    subtotal = subtotal * 0.95;
+        switch (itemIndex) {
+            case 0: // Photocopy
+                if (quantity >= QTY_PHOTOCOPY_DISCOUNT) {
+                    subtotal *= (1 - RATE_PHOTOCOPY);
                 }
                 break;
-            case 1: //printing but no discounts offered
+            case 1: // Printing - no discount
                 break;
-            case 2: //Binding
-                if (quantity >= 5) {
-            subtotal = subtotal - 500.00;
-        }
-        break;
+            case 2: // Binding
+                if (quantity >= QTY_BINDING_DISCOUNT) {
+                    subtotal -= FLAT_BINDING;
+                }
+                break;
             case 3: // Lamination
-                if (quantity >= 10) {
-            subtotal = subtotal * 0.90;
+                if (quantity >= QTY_LAMINATION_DISCOUNT) {
+                    subtotal *= (1 - RATE_LAMINATION);
+                }
+                break;
+            default:
+                break;
         }
-        break;
-}
-
         return subtotal;
     }
 
@@ -86,16 +95,13 @@ public class GROUPL_BUSINESSIMULATOR {
      * so the receipt can flag it clearly.
      */
     static boolean isDiscountApplied(int itemIndex, int quantity) {
-        if (itemIndex == 0) {
-            return quantity >= 50;
-        } else if (itemIndex == 1) {
-            return false;
-        } else if (itemIndex == 2) {
-            return quantity >= 5;
-        } else if (itemIndex == 3) {
-            return quantity >= 10;
+        switch (itemIndex) {
+            case 0: return quantity >= QTY_PHOTOCOPY_DISCOUNT;
+            case 1: return false;
+            case 2: return quantity >= QTY_BINDING_DISCOUNT;
+            case 3: return quantity >= QTY_LAMINATION_DISCOUNT;
+            default: return false;
         }
-        return false;
     }
 
     /**
@@ -103,7 +109,7 @@ public class GROUPL_BUSINESSIMULATOR {
      * a discount was applied), followed by the grand total.
      */
     static void printReceipt(String[] itemNames, int[] quantities, double[] subtotals,
-                              boolean[] discountApplied, double grandTotal) {
+                             boolean[] discountApplied, double grandTotal) {
         System.out.println("---- RECEIPT ----");
         for (int i = 0; i < itemNames.length; i++) {
             String discountLabel = discountApplied[i] ? "Discount applied" : "No discount";
