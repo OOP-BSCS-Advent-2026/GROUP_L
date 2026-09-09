@@ -28,7 +28,7 @@ public class GROUPL_BUSINESSIMULATOR {
         System.out.println("==== QUICKPRINT SHOP ====");
         System.out.println("---- PRICE LIST ----");
         for (int i = 0; i < itemNames.length; i++) {
-            System.out.printf("%d. %-20s UGX %,.2f%n", i + 1, itemNames[i], itemPrices[i]);
+            System.out.printf(Locale.US, "%d. %-20s UGX %,.2f%n", i + 1, itemNames[i], itemPrices[i]);
         }
         System.out.println();
 
