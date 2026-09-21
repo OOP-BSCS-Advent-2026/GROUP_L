@@ -1,3 +1,4 @@
+package my folder;
 /**
  * GROUP L - QuickPrint Shop
  * Superclass: holds what every item has in common (name, price)
